@@ -1,0 +1,22 @@
+library main;
+
+export 'presentations/pages/home_movies_page.dart';
+export 'presentations/pages/popular_movies_page.dart';
+export 'presentations/pages/top_rated_movies_page.dart';
+export 'presentations/pages/movie_detail_page.dart';
+export 'data/datasources/movie_local_data_source.dart';
+export 'data/datasources/movie_remote_data_source.dart';
+export 'data/repositories/movie_repository_impl.dart';
+export 'domain/repositories/movie_repository.dart';
+export 'domain/usecases/get_now_playing_movies.dart';
+export 'domain/usecases/get_popular_movies.dart';
+export 'domain/usecases/get_top_rated_movies.dart';
+export 'domain/usecases/get_watchlist_movies.dart';
+export 'presentations/cubit/now_playing_movies_cubit.dart';
+export 'presentations/cubit/top_rated_movies_cubit.dart';
+export 'presentations/cubit/popular_movies_cubit.dart';
+export 'presentations/cubit/movie_detail_cubit.dart';
+export 'presentations/cubit/movie_recommendations_cubit.dart';
+export 'presentations/cubit/movie_watchlist_cubit.dart';
+export 'presentations/widgets/movie_card_list.dart';
+export 'domain/entities/movie.dart';
