@@ -1,0 +1,25 @@
+{
+  "_id": "5256c8a019c2956ff6046dd7",
+  "air_date": "2010-12-05",
+  "episodes": [
+    {
+      "air_date": "2010-12-05",
+      "episode_number": 1,
+      "crew": [],
+      "guest_stars": [],
+      "id": 63087,
+      "name": "Inside Game of Thrones",
+      "overview": "A short look into the film-making process for the production Game of Thrones",
+      "production_code": "",
+      "season_number": 0,
+      "still_path": "/1aVzF5os3TEMeQBTyNWPlKVsY0f.jpg",
+      "vote_average": 5.1,
+      "vote_count": 15
+    }
+  ],
+  "name": "Specials",
+  "overview": "",
+  "id": 3627,
+  "poster_path": "/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg",
+  "season_number": 0
+}
