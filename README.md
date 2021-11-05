@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+[![Codemagic build status](https://api.codemagic.io/apps/618395b3f780e4ce9f15e410/618395b3f780e4ce9f15e40f/status_badge.svg)](https://codemagic.io/apps/618395b3f780e4ce9f15e410/618395b3f780e4ce9f15e40f/latest_build)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
