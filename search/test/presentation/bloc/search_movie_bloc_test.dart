@@ -6,18 +6,18 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie/movie.dart';
 import 'package:search/domain/usecases/search_movies.dart';
-import 'package:search/presentation/cubit/search_movie_cubit.dart';
+import 'package:search/presentation/bloc/search_movie_bloc.dart';
 
 import 'search_movie_bloc_test.mocks.dart';
 
 @GenerateMocks([SearchMovies])
 void main() {
-  late SearchMovieCubit searchCubit;
+  late SearchMovieBloc searchBloc;
   late MockSearchMovies mockSearchMovies;
 
   setUp(() {
     mockSearchMovies = MockSearchMovies();
-    searchCubit = SearchMovieCubit(mockSearchMovies);
+    searchBloc = SearchMovieBloc(mockSearchMovies);
   });
 
   final tMovieModel = Movie(
@@ -42,18 +42,18 @@ void main() {
 
   group('Search Movie', () {
     test('initial state should be empty', () {
-      expect(searchCubit.state, SearchMovieInitial());
+      expect(searchBloc.state, SearchMovieInitial());
     });
 
-    blocTest<SearchMovieCubit, SearchMovieState>(
+    blocTest<SearchMovieBloc, SearchMovieState>(
         'should emit [Loading, HasData] when data is gotten successfully',
         build: () {
           when(mockSearchMovies.execute(tQuery))
               .thenAnswer((_) async => Right(tMovieList));
 
-          return searchCubit;
+          return searchBloc;
         },
-        act: (cubit) => cubit.onQueryChanged(tQuery),
+        act: (bloc) => bloc.add(const OnMovieQueryChanged(tQuery)),
         wait: const Duration(milliseconds: 500),
         expect: () => [
               SearchMovieLoading(),
@@ -63,14 +63,14 @@ void main() {
           verify(mockSearchMovies.execute(tQuery));
         });
 
-    blocTest<SearchMovieCubit, SearchMovieState>(
+    blocTest<SearchMovieBloc, SearchMovieState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
         when(mockSearchMovies.execute(tQuery)).thenAnswer(
             (_) async => const Left(ServerFailure('Server Failure')));
-        return searchCubit;
+        return searchBloc;
       },
-      act: (cubit) => cubit.onQueryChanged(tQuery),
+      act: (bloc) => bloc.add(const OnMovieQueryChanged(tQuery)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
         SearchMovieLoading(),

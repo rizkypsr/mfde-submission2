@@ -5,19 +5,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search/domain/usecases/search_tv_series.dart';
-import 'package:search/search.dart';
+import 'package:search/presentation/bloc/search_tv_bloc.dart';
 import 'package:tv/tv.dart';
 
 import 'search_tv_bloc_test.mocks.dart';
 
 @GenerateMocks([SearchTvSeries])
 void main() {
-  late SearchTvCubit searchCubit;
+  late SearchTvBloc searchTvBloc;
   late MockSearchTvSeries mockSearchTvSeries;
 
   setUp(() {
     mockSearchTvSeries = MockSearchTvSeries();
-    searchCubit = SearchTvCubit(mockSearchTvSeries);
+    searchTvBloc = SearchTvBloc(mockSearchTvSeries);
   });
 
   final tTvSeriesModel = TvSeries(
@@ -38,18 +38,18 @@ void main() {
 
   group('Search Tv', () {
     test('initial state should be empty', () {
-      expect(searchCubit.state, SearchTvInitial());
+      expect(searchTvBloc.state, SearchTvInitial());
     });
 
-    blocTest<SearchTvCubit, SearchTvState>(
+    blocTest<SearchTvBloc, SearchTvState>(
         'should emit [Loading, HasData] when data is gotten successfully',
         build: () {
           when(mockSearchTvSeries.execute(tQuery))
               .thenAnswer((_) async => Right(tTvSeriesList));
 
-          return searchCubit;
+          return searchTvBloc;
         },
-        act: (cubit) => cubit.onQueryChanged(tQuery),
+        act: (bloc) => bloc.add(const OnTvQueryChanged(tQuery)),
         wait: const Duration(milliseconds: 500),
         expect: () => [
               SearchTvLoading(),
@@ -59,14 +59,14 @@ void main() {
           verify(mockSearchTvSeries.execute(tQuery));
         });
 
-    blocTest<SearchTvCubit, SearchTvState>(
+    blocTest<SearchTvBloc, SearchTvState>(
       'Should emit [Loading, Error] when get search is unsuccessful',
       build: () {
         when(mockSearchTvSeries.execute(tQuery)).thenAnswer(
             (_) async => const Left(ServerFailure('Server Failure')));
-        return searchCubit;
+        return searchTvBloc;
       },
-      act: (cubit) => cubit.onQueryChanged(tQuery),
+      act: (bloc) => bloc.add(const OnTvQueryChanged(tQuery)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
         SearchTvLoading(),

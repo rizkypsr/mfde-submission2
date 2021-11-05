@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
 import 'package:provider/provider.dart';
-import 'package:search/presentation/cubit/search_movie_cubit.dart';
-import 'package:search/search.dart';
+import 'package:search/presentation/bloc/search_movie_bloc.dart';
+import 'package:search/presentation/bloc/search_tv_bloc.dart';
+
 import 'package:tv/tv.dart';
 
 class SearchPage extends StatelessWidget {
@@ -26,9 +27,11 @@ class SearchPage extends StatelessWidget {
             TextField(
               onChanged: (query) {
                 if (mediaType == 'movie') {
-                  context.read<SearchMovieCubit>().onQueryChanged(query);
+                  context
+                      .read<SearchMovieBloc>()
+                      .add(OnMovieQueryChanged(query));
                 } else {
-                  context.read<SearchTvCubit>().onQueryChanged(query);
+                  context.read<SearchTvBloc>().add(OnTvQueryChanged(query));
                 }
               },
               decoration: const InputDecoration(
@@ -61,7 +64,7 @@ class SearchResultList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return mediaType == 'movie'
-        ? BlocBuilder<SearchMovieCubit, SearchMovieState>(
+        ? BlocBuilder<SearchMovieBloc, SearchMovieState>(
             builder: (context, state) {
               if (state is SearchMovieLoading) {
                 return const Center(
@@ -92,7 +95,7 @@ class SearchResultList extends StatelessWidget {
               }
             },
           )
-        : BlocBuilder<SearchTvCubit, SearchTvState>(
+        : BlocBuilder<SearchTvBloc, SearchTvState>(
             builder: (context, state) {
               if (state is SearchTvLoading) {
                 return const Center(

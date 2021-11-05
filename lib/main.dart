@@ -1,5 +1,6 @@
 import 'package:about/about_page.dart';
 import 'package:core/core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ditonton/injection.dart' as di;
@@ -12,7 +13,9 @@ import 'package:tv/tv.dart';
 import 'package:watchlist/presentations/cubit/watchlist_cubit.dart';
 import 'package:watchlist/watchlist.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   di.init();
   runApp(const MyApp());
 }
@@ -49,9 +52,11 @@ class MyApp extends StatelessWidget {
             create: (_) => di.locator<TvRecommendationsCubit>()),
         BlocProvider<TvSeasonDetailCubit>(
             create: (_) => di.locator<TvSeasonDetailCubit>()),
-        BlocProvider<SearchMovieCubit>(
-            create: (_) => di.locator<SearchMovieCubit>()),
-        BlocProvider<SearchTvCubit>(create: (_) => di.locator<SearchTvCubit>()),
+        BlocProvider<SearchMovieBloc>(
+            create: (_) => di.locator<SearchMovieBloc>()),
+        BlocProvider<SearchTvBloc>(create: (_) => di.locator<SearchTvBloc>()),
+        BlocProvider<TvWatchlistCubit>(
+            create: (_) => di.locator<TvWatchlistCubit>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -54,8 +54,8 @@ void init() {
       getWatchListTvSeriesStatus: locator(),
       removeWatchlistTvSeries: locator(),
       saveWatchlistTvSeries: locator()));
-  locator.registerFactory(() => SearchMovieCubit(locator()));
-  locator.registerFactory(() => SearchTvCubit(locator()));
+  locator.registerFactory(() => SearchMovieBloc(locator()));
+  locator.registerFactory(() => SearchTvBloc(locator()));
 
   // usecases
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

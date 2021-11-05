@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^2.1.0
+  firebase_crashlytics: ^2.2.4
   sqflite: ^2.0.0+4
 
 dev_dependencies:
