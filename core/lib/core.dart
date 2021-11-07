@@ -8,6 +8,7 @@ export 'utils/failure.dart';
 export 'utils/json_reader.dart';
 export 'utils/routes.dart';
 export 'utils/state_enum.dart';
+export 'utils/secure_http.dart';
 export 'presentations/widgets/build_sub_heading.dart';
 export 'presentations/widgets/drawer_widget.dart';
 export 'data/datasources/db/database_helper.dart';

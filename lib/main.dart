@@ -16,6 +16,7 @@ import 'package:watchlist/watchlist.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await SecureHttp.init();
   di.init();
   runApp(const MyApp());
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:core/core.dart';
 import 'package:http/http.dart' as http;
+import 'package:core/core.dart';
 import 'package:movie/data/models/movie_detail_model.dart';
 import 'package:movie/data/models/movie_model.dart';
 import 'package:movie/data/models/movie_response.dart';
